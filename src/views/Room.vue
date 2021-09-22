@@ -38,7 +38,7 @@
               </div>
               <div>
                 <template v-if="room && room.started">
-                  <h5 style="color: white">{{ isAskingForCard == 1 ? "Escoge una carta" : "Mano actual" }}</h5>
+                  <h5 style="color: white">{{ isAskingForCard == 1 ? "Escoge una carta a descartar" : "Mano actual" }}</h5>
                   <div uk-grid class="uk-grid-small">
                     <img
                       v-for="card in client.cards"
@@ -50,6 +50,7 @@
                     />
                   </div>
                   <p v-if="!isCurrentTurn">Espera a que sea tu turno para jugar</p>
+                  <p v-if="isPlayingHand">RECUERDA! Solo tienes esta ronda para mejorar tu mano.</p>
                   <div v-if="!selectingDeck" class="uk-margin-top">
                     <button :disabled="!isAlive || !isCurrentTurn || canEndTurn" v-if="isAskingForCard != 1" @click="startCardProcess" class="uk-button uk-button-primary uk-margin-right">
                       Jalar carta
