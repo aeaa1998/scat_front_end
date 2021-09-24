@@ -46,34 +46,36 @@
                       class="hand_card"
                       :src="require(`../assets/cards/${card.path}.png`)"
                       :class="{ hand_select: isAskingForCard == 1 }"
-                      @click="() => discardCardProcess(card)"
+                      @click.once="() => discardCardProcess(card)"
                     />
                   </div>
                   <p v-if="!isCurrentTurn">Espera a que sea tu turno para jugar</p>
                   <p v-if="isPlayingHand">RECUERDA! Solo tienes esta ronda para mejorar tu mano.</p>
                   <div v-if="!selectingDeck" class="uk-margin-top">
-                    <button :disabled="!isAlive || !isCurrentTurn || canEndTurn" v-if="isAskingForCard != 1" @click="startCardProcess" class="uk-button uk-button-primary uk-margin-right">
+                    <button :disabled="!isAlive || !isCurrentTurn || canEndTurn" v-if="isAskingForCard != 1" @click.once="startCardProcess" class="uk-button uk-button-primary uk-margin-right">
                       Jalar carta
                     </button>
-                    <button :disabled="!isAlive || !isCurrentTurn" v-if="isAskingForCard != 1" @click="() => sendHandProcess()" class="uk-button uk-button-primary uk-margin-right">Mandar mano</button>
-                    <button :disabled="!isAlive || !isCurrentTurn || !canEndTurn || isPlayingHand" v-if="isAskingForCard != 1" @click="endTurn" class="uk-button uk-button-primary">
+                    <button :disabled="!isAlive || !isCurrentTurn" v-if="isAskingForCard != 1" @click.once="() => sendHandProcess()" class="uk-button uk-button-primary uk-margin-right">
+                      Mandar mano
+                    </button>
+                    <button :disabled="!isAlive || !isCurrentTurn || !canEndTurn || isPlayingHand" v-if="isAskingForCard != 1" @click.once="endTurn" class="uk-button uk-button-primary">
                       Finalizar turno
                     </button>
-                    <button :disabled="canEndTurn" @click="logout" class="uk-button uk-button-danger uk-margin-left">Salir sesión</button>
+                    <button :disabled="canEndTurn" @click.once="logout" class="uk-button uk-button-danger uk-margin-left">Salir sesión</button>
                   </div>
                   <div v-if="selectingDeck" class="uk-margin-top">
-                    <button :disabled="room.deck.cards.length == 0" @click="() => askCardProcess('deck')" class="uk-button uk-button-primary uk-modal-close uk-margin-right" type="button">
+                    <button :disabled="room.deck.cards.length == 0" @click.once="() => askCardProcess('deck')" class="uk-button uk-button-primary uk-modal-close uk-margin-right" type="button">
                       Jalar del Deck
                     </button>
-                    <button :disabled="room.visibleDeck.cards.length == 0" @click="() => askCardProcess('visible_deck')" class="uk-button uk-button-primary uk-modal-close" type="button">
+                    <button :disabled="room.visibleDeck.cards.length == 0" @click.once="() => askCardProcess('visible_deck')" class="uk-button uk-button-primary uk-modal-close" type="button">
                       Jalar de los Descartes
                     </button>
                   </div>
                 </template>
                 <div v-else class="uk-margin-top">
                   <div class="uk-margin-bottom">Tendras tu mano una vez el juego inicie</div>
-                  <button @click="startRoom" v-if="room && !room.checked" class="uk-button uk-button-primary uk-margin-right">Iniciar juego</button>
-                  <button @click="logout" class="uk-button uk-button-danger">Salir sesión</button>
+                  <button @click.once="startRoom" v-if="room && !room.checked" class="uk-button uk-button-primary uk-margin-right">Iniciar juego</button>
+                  <button @click.once="logout" class="uk-button uk-button-danger">Salir sesión</button>
                 </div>
               </div>
             </div>
@@ -104,7 +106,7 @@
             <input v-model="chat" class="uk-input" type="text" placeholder="Ingrese algo al chat..." />
             <button
               class="uk-form-icon uk-form-icon-flip"
-              @click="
+              @click.once="
                 () => {
                   sendChat(chat);
                   chat = null;
@@ -121,8 +123,8 @@
         <h1 v-if="winner.username != username" style="color: white">El ganador es: {{ winner.username }}</h1>
         <h1 v-else style="color: white">TU HAS GANADO</h1>
         <p style="color: white">Si deseas jugar otra partida haz click en "otra partida" si no cierra tu sesión</p>
-        <button @click="resetGame" class="uk-button uk-button-primary uk-margin-right">Otra partida</button>
-        <button @click="logout" class="uk-button uk-button-danger">Salir sesión</button>
+        <button @click.once="resetGame" class="uk-button uk-button-primary uk-margin-right">Otra partida</button>
+        <button @click.once="logout" class="uk-button uk-button-danger">Salir sesión</button>
       </div>
     </template>
   </div>

@@ -8,7 +8,7 @@
         <label><input v-model="newRoom" class="uk-checkbox uk-margin-right" type="checkbox" />Nueva sala?</label>
         <div v-if="!newRoom">Ingrese el id del room</div>
         <input v-if="!newRoom" v-model="roomId" class="uk-input" />
-        <button @click="() => setUsername({ username, roomId })" class="uk-button uk-button-default">Ingresar</button>
+        <button @click.once="() => setUsername({ username, roomId })" class="uk-button uk-button-default">Ingresar</button>
       </template>
 
       <div v-else>

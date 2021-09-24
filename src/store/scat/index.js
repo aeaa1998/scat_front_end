@@ -119,7 +119,7 @@ const mutations = {
     },
 
     [types.START_CLIENT] (state) {
-        state.websocket = new WebSocket('ws://localhost:4223/')
+        state.websocket = new WebSocket('ws://3.17.2.164/')
         state.websocket.onopen = () => {
             state.connectedToSocket = true
         }
